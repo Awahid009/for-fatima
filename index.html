@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Fatima ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    overflow:hidden;
+    background:#000;
+}
+
+.slider{
+    display:flex;
+    width:400%;
+    height:100vh;
+    transition:transform 0.8s ease-in-out;
+}
+
+.slide{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+    color:white;
+}
+
+.slide h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.slide p{
+    max-width:700px;
+    font-size:22px;
+    line-height:1.8;
+}
+
+.slide1{
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+}
+
+.slide2{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.slide3{
+    background:linear-gradient(135deg,#ff9966,#ff5e62);
+}
+
+.slide4{
+    background:linear-gradient(135deg,#ff4b7d,#ff758c);
+}
+
+.heart{
+    font-size:70px;
+    animation:beat 1s infinite;
+    margin:20px;
+}
+
+@keyframes beat{
+    50%{transform:scale(1.25);} 
+}
+
+.next{
+    margin-top:40px;
+    padding:15px 35px;
+    font-size:18px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    background:white;
+    color:#ff4b7d;
+    font-weight:bold;
+}
+
+.buttons{
+    margin-top:35px;
+    position:relative;
+    width:350px;
+    height:120px;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:40px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+#yes{
+    background:#fff;
+    color:#ff4b7d;
+}
+
+#no{
+    position:absolute;
+    left:200px;
+    background:#555;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<div class="slider" id="slider">
+
+<!-- Slide 1 -->
+<section class="slide slide1">
+<div class="heart">❤️</div>
+<h1>Dear Fatima</h1>
+<p>
+Every time I think about you, my heart smiles.
+Your beauty shines not only through your smile,
+but through your kindness and the warmth you bring.
+</p>
+<button class="next" onclick="nextSlide()">Next ➜</button>
+</section>
+
+<!-- Slide 2 -->
+<section class="slide slide2">
+<div class="heart">🌹</div>
+<h1>Your Beauty</h1>
+<p>
+Your eyes sparkle brighter than the stars,
+your smile lights up every room,
+and your presence makes every moment unforgettable.
+To me, you are truly one of a kind.
+</p>
+<button class="next" onclick="nextSlide()">Next ➜</button>
+</section>
+
+<!-- Slide 3 -->
+<section class="slide slide3">
+<div class="heart">💕</div>
+<h1>My Feelings</h1>
+<p>
+You make ordinary days feel special.
+I cherish every conversation,
+every smile,
+and every memory with you.
+I hope you always know how wonderful and appreciated you are.
+</p>
+<button class="next" onclick="nextSlide()">Next ➜</button>
+</section>
+
+<!-- Slide 4 -->
+<section class="slide slide4">
+<div class="heart">💍</div>
+<h1>One Last Question...</h1>
+
+<h2 style="margin:20px;font-size:40px;">
+Will You Be Mine? ❤️
+</h2>
+
+<div class="buttons">
+<button id="yes" onclick="yes()">Yes ❤️</button>
+<button id="no" onmouseover="run()">No 😅</button>
+</div>
+
+</section>
+
+</div>
+
+<script>
+
+let current=0;
+
+function nextSlide(){
+    if(current<3){
+        current++;
+        document.getElementById("slider").style.transform=
+        `translateX(-${current*100}vw)`;
+    }
+}
+
+function yes(){
+    alert("❤️ Thank you, Fatima! You made my heart so happy! ❤️");
+}
+
+function run(){
+    let btn=document.getElementById("no");
+
+    btn.style.left=Math.random()*250+"px";
+    btn.style.top=Math.random()*80+"px";
+}
+
+</script>
+
+</body>
+</html>
