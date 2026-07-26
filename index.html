@@ -13,10 +13,20 @@ box-sizing:border-box;
 font-family:Arial,Helvetica,sans-serif;
 }
 
+html, body {
+width:100%;
+height:100%;
+margin:0;
+padding:0;
+}
+
 body{
 overflow:hidden;
 background:linear-gradient(135deg,#ff9ec4,#ff5f9e,#ffb6c1);
 color:white;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .container{
@@ -39,29 +49,29 @@ position:relative;
 }
 
 h1{
-font-size:55px;
-margin-bottom:20px;
+font-size:75px;
+margin-bottom:30px;
 text-shadow:2px 2px 10px rgba(0,0,0,.3);
 }
 
 h2{
-font-size:40px;
-margin-bottom:20px;
+font-size:60px;
+margin-bottom:30px;
 }
 
 p{
-font-size:22px;
-max-width:800px;
+font-size:28px;
+max-width:900px;
 line-height:1.8;
 }
 
 button{
-padding:15px 35px;
-font-size:20px;
+padding:20px 50px;
+font-size:24px;
 border:none;
-border-radius:40px;
+border-radius:50px;
 cursor:pointer;
-margin-top:40px;
+margin-top:50px;
 background:white;
 color:#ff2b6d;
 font-weight:bold;
@@ -69,7 +79,7 @@ transition:.3s;
 }
 
 button:hover{
-transform:scale(1.08);
+transform:scale(1.1);
 }
 
 .hearts{
@@ -85,7 +95,7 @@ pointer-events:none;
 .heart{
 position:absolute;
 color:rgba(255,255,255,.8);
-font-size:20px;
+font-size:40px;
 animation:float linear infinite;
 }
 
@@ -105,31 +115,37 @@ opacity:0;
 
 .buttons{
 display:flex;
-gap:30px;
-margin-top:50px;
+gap:50px;
+margin-top:60px;
 position:relative;
+justify-content:center;
 }
 
 #yes{
 background:#00c853;
 color:white;
+padding:25px 60px;
+font-size:28px;
 }
 
 #no{
 background:#ff1744;
 color:white;
 position:absolute;
-left:180px;
+left:50%;
+transform:translateX(-50%);
+padding:25px 60px;
+font-size:28px;
 }
 
 .success{
-font-size:55px;
+font-size:80px;
 animation:pop 1s infinite alternate;
 }
 
 @keyframes pop{
 from{transform:scale(1);}
-to{transform:scale(1.1);}
+to{transform:scale(1.15);}
 }
 </style>
 </head>
@@ -199,8 +215,8 @@ const no=document.getElementById("no");
 
 no.addEventListener("mouseover",()=>{
 
-let x=Math.random()*250-100;
-let y=Math.random()*180-90;
+let x=Math.random()*400-200;
+let y=Math.random()*300-150;
 
 no.style.transform=`translate(${x}px,${y}px)`;
 
@@ -217,14 +233,14 @@ confettiHearts();
 
 function confettiHearts(){
 
-for(let i=0;i<80;i++){
+for(let i=0;i<150;i++){
 
 let heart=document.createElement("div");
 heart.className="heart";
 heart.innerHTML="❤️";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(2+Math.random()*4)+"s";
-heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.fontSize=(30+Math.random()*50)+"px";
 document.body.appendChild(heart);
 
 setTimeout(()=>{
@@ -237,7 +253,7 @@ heart.remove();
 
 const hearts=document.getElementById("hearts");
 
-for(let i=0;i<50;i++){
+for(let i=0;i<80;i++){
 
 let heart=document.createElement("div");
 heart.className="heart";
@@ -246,7 +262,7 @@ heart.innerHTML="❤";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(5+Math.random()*8)+"s";
 heart.style.animationDelay=Math.random()*5+"s";
-heart.style.fontSize=(15+Math.random()*25)+"px";
+heart.style.fontSize=(30+Math.random()*40)+"px";
 
 hearts.appendChild(heart);
 
