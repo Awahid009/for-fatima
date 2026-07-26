@@ -52,6 +52,7 @@ position:relative;
 
 .slide-content{
 max-width:1000px;
+width:100%;
 }
 
 h1{
@@ -77,6 +78,7 @@ line-height:1.85;
 font-weight:300;
 letter-spacing:0.3px;
 text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+margin:0 auto;
 }
 
 button{
@@ -142,13 +144,14 @@ opacity:0;
 
 .buttons{
 display:flex;
-gap:60px;
+flex-direction:column;
+gap:40px;
 margin-top:70px;
 position:relative;
 justify-content:center;
 align-items:center;
-flex-wrap:wrap;
 z-index:10;
+min-height:100px;
 }
 
 #yes{
@@ -157,6 +160,8 @@ color:white;
 padding:25px 70px;
 font-size:28px;
 box-shadow: 0 12px 35px rgba(0, 200, 83, 0.35);
+position:relative;
+margin:0 auto;
 }
 
 #yes:hover{
@@ -166,12 +171,12 @@ box-shadow: 0 16px 45px rgba(0, 200, 83, 0.45);
 #no{
 background:linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
 color:white;
-position:absolute;
-left:50%;
-transform:translateX(-50%);
 padding:25px 70px;
 font-size:28px;
 box-shadow: 0 12px 35px rgba(255, 23, 68, 0.35);
+position:relative;
+margin:0 auto;
+transition:transform 0.2s ease-out;
 }
 
 #no:hover{
@@ -209,7 +214,7 @@ background:linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #8b5974 100%);
 
 /* Navigation dots */
 .nav-dots{
-position:absolute;
+position:fixed;
 bottom:40px;
 left:50%;
 transform:translateX(-50%);
@@ -265,6 +270,7 @@ right:0;
 bottom:0;
 background:radial-gradient(circle at 50% 100%, rgba(255,255,255,0.1) 0%, transparent 70%);
 pointer-events:none;
+z-index:0;
 }
 
 @media (max-width: 768px) {
@@ -306,7 +312,7 @@ From the very first moment, something about you made my world brighter. Every sm
 
 <div class="slide slide2">
 <div class="slide-content">
-<div class="emoji-accent">🌹</div>
+<div class="emoji-accent">���</div>
 <h2>You Mean Everything To Me</h2>
 <p>
 You make ordinary moments feel magical. Your kindness, your genuine smile, and your beautiful spirit make my heart happier than words could ever express. Every conversation with you is a treasured memory.
@@ -334,7 +340,7 @@ If I had one wish, it would be to spend forever making you smile. No matter wher
 
 <div class="buttons">
 <button id="yes" onclick="yes()">YES, I Will ❤️</button>
-<button id="no">Maybe Later 😊</button>
+<button id="no" onclick="noHover()">Maybe Later 😊</button>
 </div>
 
 <div id="result"></div>
@@ -386,19 +392,20 @@ function updateSlider(){
 }
 
 const no = document.getElementById("no");
-const buttons = document.querySelector('.buttons');
+
+function noHover(){
+  let x = (Math.random() * 300) - 150;
+  let y = (Math.random() * 200) - 100;
+  no.style.transform = `translate(${x}px, ${y}px)`;
+}
 
 no.addEventListener("mouseover", () => {
-  if(!buttons) return;
-  let x = Math.random() * 500 - 250;
-  let y = Math.random() * 350 - 175;
-  no.style.transform = `translate(${x}px, ${y}px)`;
+  noHover();
 });
 
-no.addEventListener("click", () => {
-  let x = Math.random() * 500 - 250;
-  let y = Math.random() * 350 - 175;
-  no.style.transform = `translate(${x}px, ${y}px)`;
+no.addEventListener("click", (e) => {
+  e.preventDefault();
+  noHover();
 });
 
 function yes(){
