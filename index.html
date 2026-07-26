@@ -8,288 +8,249 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html, body {
-width:100%;
-height:100%;
-margin:0;
-padding:0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-body{
-overflow:hidden;
-background:linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #ff9ec4 100%);
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:'Poppins', sans-serif;
+body {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #ff9ec4 100%);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.container{
-display:flex;
-width:500%;
-height:100vh;
-transition:1s cubic-bezier(0.4, 0, 0.2, 1);
+.slider-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
-.slide{
-width:100vw;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:60px 40px;
-position:relative;
+.slides-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.35, 0.17, 0.3, 0.83);
 }
 
-.slide-content{
-max-width:1000px;
-width:100%;
+.slide {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 40px;
+  position: relative;
 }
 
-h1{
-font-size:85px;
-margin-bottom:25px;
-text-shadow: 0 8px 25px rgba(0,0,0,0.2);
-font-weight:800;
-letter-spacing:-1px;
-line-height:1.1;
+.slide-content {
+  max-width: 900px;
+  width: 100%;
+  z-index: 2;
 }
 
-h2{
-font-size:65px;
-margin-bottom:25px;
-font-weight:700;
-text-shadow: 0 8px 25px rgba(0,0,0,0.2);
+h1 {
+  font-size: 90px;
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  line-height: 1;
 }
 
-p{
-font-size:28px;
-max-width:1000px;
-line-height:1.85;
-font-weight:300;
-letter-spacing:0.3px;
-text-shadow: 0 2px 10px rgba(0,0,0,0.15);
-margin:0 auto;
+h2 {
+  font-size: 70px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  text-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
-button{
-padding:22px 55px;
-font-size:26px;
-border:none;
-border-radius:50px;
-cursor:pointer;
-margin-top:50px;
-background:white;
-color:#ff2b6d;
-font-weight:700;
-transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-font-family:'Poppins', sans-serif;
-letter-spacing:0.5px;
+p {
+  font-size: 28px;
+  line-height: 1.9;
+  font-weight: 300;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  max-width: 950px;
 }
 
-button:hover{
-transform:scale(1.08) translateY(-3px);
-box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+.emoji {
+  font-size: 100px;
+  margin-bottom: 25px;
+  display: inline-block;
+  animation: float-emoji 3s ease-in-out infinite;
 }
 
-button:active{
-transform:scale(1.04) translateY(-1px);
+@keyframes float-emoji {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
-.hearts{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-overflow:hidden;
-pointer-events:none;
-z-index:1;
+button {
+  padding: 24px 60px;
+  font-size: 26px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 60px;
+  background: white;
+  color: #ff2b6d;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
 }
 
-.heart{
-position:absolute;
-color:rgba(255,255,255,0.85);
-font-size:40px;
-animation:float linear infinite;
-filter:drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+button:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes float{
-0%{
-transform:translateY(100vh) rotate(0deg);
-opacity:0;
-}
-10%{
-opacity:1;
-}
-90%{
-opacity:1;
-}
-100%{
-transform:translateY(-120vh) rotate(360deg);
-opacity:0;
-}
+button:active {
+  transform: scale(1.05) translateY(-2px);
 }
 
-.buttons{
-display:flex;
-flex-direction:column;
-gap:40px;
-margin-top:70px;
-position:relative;
-justify-content:center;
-align-items:center;
-z-index:10;
-min-height:100px;
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-top: 80px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 120px;
 }
 
-#yes{
-background:linear-gradient(135deg, #00c853 0%, #00e676 100%);
-color:white;
-padding:25px 70px;
-font-size:28px;
-box-shadow: 0 12px 35px rgba(0, 200, 83, 0.35);
-position:relative;
-margin:0 auto;
+#yes {
+  background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+  color: white;
+  box-shadow: 0 12px 35px rgba(0, 200, 83, 0.4);
 }
 
-#yes:hover{
-box-shadow: 0 16px 45px rgba(0, 200, 83, 0.45);
+#yes:hover {
+  box-shadow: 0 18px 50px rgba(0, 200, 83, 0.5);
 }
 
-#no{
-background:linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
-color:white;
-padding:25px 70px;
-font-size:28px;
-box-shadow: 0 12px 35px rgba(255, 23, 68, 0.35);
-position:relative;
-margin:0 auto;
-transition:transform 0.2s ease-out;
+#no {
+  background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
+  color: white;
+  box-shadow: 0 12px 35px rgba(255, 23, 68, 0.4);
+  transition: transform 0.15s ease-out;
 }
 
-#no:hover{
-box-shadow: 0 16px 45px rgba(255, 23, 68, 0.45);
+#no:hover {
+  box-shadow: 0 18px 50px rgba(255, 23, 68, 0.5);
 }
 
-.success{
-font-size:90px;
-animation:pop 1s infinite alternate;
-margin-top:30px;
-filter:drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+.success-message {
+  font-size: 95px;
+  animation: pop 1s infinite alternate;
+  margin-top: 40px;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
 }
 
-@keyframes pop{
-from{transform:scale(1);}
-to{transform:scale(1.18);}
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
 }
 
-/* Slide Backgrounds with Gradients */
-.slide1{
-background:linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffa8c0 100%);
+/* Slide Backgrounds */
+.slide1 { background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffa8c0 100%); }
+.slide2 { background: linear-gradient(135deg, #ff8fab 0%, #ffb3c6 50%, #ffc0d1 100%); }
+.slide3 { background: linear-gradient(135deg, #ff7fa0 0%, #ff9fb8 50%, #ffb8d1 100%); }
+.slide4 { background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #8b5974 100%); }
+
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.slide2{
-background:linear-gradient(135deg, #ff8fab 0%, #ffb3c6 50%, #ffc0d1 100%);
+/* Hearts Background */
+.hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.slide3{
-background:linear-gradient(135deg, #ff7fa0 0%, #ff9fb8 50%, #ffb8d1 100%);
+.heart {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 40px;
+  animation: float linear infinite;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
-.slide4{
-background:linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #8b5974 100%);
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
 }
 
-/* Navigation dots */
-.nav-dots{
-position:fixed;
-bottom:40px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:15px;
-z-index:20;
+/* Navigation Dots */
+.nav-dots {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  z-index: 100;
 }
 
-.dot{
-width:14px;
-height:14px;
-border-radius:50%;
-background:rgba(255,255,255,0.4);
-cursor:pointer;
-transition:all 0.3s ease;
-box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.dot.active{
-background:white;
-transform:scale(1.3);
-box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+.dot.active {
+  background: white;
+  transform: scale(1.35);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
-.dot:hover{
-background:rgba(255,255,255,0.7);
-}
-
-/* Emoji animation */
-.emoji-accent{
-display:inline-block;
-font-size:90px;
-margin-bottom:20px;
-animation:float-emoji 3s ease-in-out infinite;
-}
-
-@keyframes float-emoji{
-0%, 100%{
-transform:translateY(0px) scale(1);
-}
-50%{
-transform:translateY(-15px) scale(1.05);
-}
-}
-
-/* Premium shadows and effects */
-.slide::before{
-content:'';
-position:absolute;
-top:0;
-left:0;
-right:0;
-bottom:0;
-background:radial-gradient(circle at 50% 100%, rgba(255,255,255,0.1) 0%, transparent 70%);
-pointer-events:none;
-z-index:0;
+.dot:hover {
+  background: rgba(255, 255, 255, 0.75);
 }
 
 @media (max-width: 768px) {
-h1{
-font-size:60px;
-}
-h2{
-font-size:45px;
-}
-p{
-font-size:20px;
-}
-button{
-padding:18px 40px;
-font-size:20px;
-}
-.buttons{
-gap:20px;
-}
+  h1 { font-size: 60px; }
+  h2 { font-size: 45px; }
+  p { font-size: 20px; }
+  .emoji { font-size: 70px; }
+  button { padding: 18px 40px; font-size: 20px; margin-top: 40px; }
 }
 </style>
 </head>
@@ -297,153 +258,138 @@ gap:20px;
 
 <div class="hearts" id="hearts"></div>
 
-<div class="container" id="slides">
+<div class="slider-container">
+  <div class="slides-wrapper" id="slidesWrapper">
 
-<div class="slide slide1">
-<div class="slide-content">
-<div class="emoji-accent">❤️</div>
-<h1>Dear Mariyam Fatima</h1>
-<p>
-From the very first moment, something about you made my world brighter. Every smile of yours feels like sunshine after rain, and your presence brings warmth to even the coldest days.
-</p>
-<button onclick="nextSlide()">Continue ➜</button>
-</div>
-</div>
+    <!-- Slide 1 -->
+    <div class="slide slide1">
+      <div class="slide-content">
+        <div class="emoji">❤️</div>
+        <h1>Dear Mariyam Fatima</h1>
+        <p>From the very first moment, something about you made my world brighter. Every smile of yours feels like sunshine after rain, and your presence brings warmth to even the coldest days.</p>
+        <button onclick="goToSlide(1)">Continue ➜</button>
+      </div>
+    </div>
 
-<div class="slide slide2">
-<div class="slide-content">
-<div class="emoji-accent">���</div>
-<h2>You Mean Everything To Me</h2>
-<p>
-You make ordinary moments feel magical. Your kindness, your genuine smile, and your beautiful spirit make my heart happier than words could ever express. Every conversation with you is a treasured memory.
-</p>
-<button onclick="nextSlide()">Continue ➜</button>
-</div>
-</div>
+    <!-- Slide 2 -->
+    <div class="slide slide2">
+      <div class="slide-content">
+        <div class="emoji">🌹</div>
+        <h2>You Mean Everything</h2>
+        <p>You make ordinary moments feel magical. Your kindness, your genuine smile, and your beautiful spirit make my heart happier than words could ever express. Every moment with you is treasured.</p>
+        <button onclick="goToSlide(2)">Continue ➜</button>
+      </div>
+    </div>
 
-<div class="slide slide3">
-<div class="slide-content">
-<div class="emoji-accent">💖</div>
-<h2>My Heart Speaks Your Name</h2>
-<p>
-If I had one wish, it would be to spend forever making you smile. No matter where life takes us, you'll always hold a special place in my heart. You are my inspiration, my joy, and my greatest blessing.
-</p>
-<button onclick="nextSlide()">Continue ➜</button>
-</div>
-</div>
+    <!-- Slide 3 -->
+    <div class="slide slide3">
+      <div class="slide-content">
+        <div class="emoji">💖</div>
+        <h2>My Heart Speaks Your Name</h2>
+        <p>If I had one wish, it would be to spend forever making you smile. No matter where life takes us, you'll always hold a special place in my heart. You are my greatest blessing.</p>
+        <button onclick="goToSlide(3)">Continue ➜</button>
+      </div>
+    </div>
 
-<div class="slide slide4">
-<div class="slide-content">
-<div class="emoji-accent">💍</div>
-<h1 style="margin-bottom:35px;">One Last Question...</h1>
-<h2>Will You Be Mine? ❤️</h2>
+    <!-- Slide 4 -->
+    <div class="slide slide4">
+      <div class="slide-content">
+        <div class="emoji">💍</div>
+        <h1 style="margin-bottom: 40px;">One Last Question...</h1>
+        <h2>Will You Be Mine? ❤️</h2>
+        <div class="buttons-container">
+          <button id="yes" onclick="yes()">YES, I Will ❤️</button>
+          <button id="no" onclick="avoidClick(event)">Maybe Later 😊</button>
+        </div>
+        <div id="result"></div>
+      </div>
+    </div>
 
-<div class="buttons">
-<button id="yes" onclick="yes()">YES, I Will ❤️</button>
-<button id="no" onclick="noHover()">Maybe Later 😊</button>
-</div>
-
-<div id="result"></div>
-</div>
-</div>
-
+  </div>
 </div>
 
-<div class="nav-dots" id="nav-dots"></div>
+<div class="nav-dots" id="navDots"></div>
 
 <script>
+let currentSlide = 0;
+const totalSlides = 4;
+const slidesWrapper = document.getElementById('slidesWrapper');
+const navDots = document.getElementById('navDots');
 
-let current = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
-
-// Create navigation dots
-const navDots = document.getElementById('nav-dots');
-for(let i = 0; i < totalSlides; i++){
+// Create dots
+for (let i = 0; i < totalSlides; i++) {
   const dot = document.createElement('div');
   dot.className = 'dot' + (i === 0 ? ' active' : '');
   dot.onclick = () => goToSlide(i);
   navDots.appendChild(dot);
 }
 
-function updateDots(){
+function updateDots() {
   const dots = document.querySelectorAll('.dot');
   dots.forEach((dot, index) => {
-    dot.classList.toggle('active', index === current);
+    dot.classList.toggle('active', index === currentSlide);
   });
 }
 
-function nextSlide(){
-  if(current < totalSlides - 1){
-    current++;
-    updateSlider();
+function goToSlide(index) {
+  if (index >= 0 && index < totalSlides) {
+    currentSlide = index;
+    slidesWrapper.style.transform = `translateX(-${index * 100}%)`;
     updateDots();
   }
 }
 
-function goToSlide(index){
-  current = index;
-  updateSlider();
-  updateDots();
+const noBtn = document.getElementById('no');
+
+function avoidClick(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  const x = (Math.random() * 400) - 200;
+  const y = (Math.random() * 300) - 150;
+  
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-function updateSlider(){
-  document.getElementById("slides").style.transform = `translateX(-${current*100}vw)`;
-}
-
-const no = document.getElementById("no");
-
-function noHover(){
-  let x = (Math.random() * 300) - 150;
-  let y = (Math.random() * 200) - 100;
-  no.style.transform = `translate(${x}px, ${y}px)`;
-}
-
-no.addEventListener("mouseover", () => {
-  noHover();
+noBtn.addEventListener('mouseover', () => {
+  const x = (Math.random() * 400) - 200;
+  const y = (Math.random() * 300) - 150;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-no.addEventListener("click", (e) => {
-  e.preventDefault();
-  noHover();
-});
-
-function yes(){
-  document.getElementById("result").innerHTML = "<div class='success'>🥰 You Just Made Me The Happiest! 🎉</div>";
+function yes() {
+  document.getElementById('result').innerHTML = '<div class="success-message">🥰 You Just Made Me The Happiest! 🎉</div>';
   confettiHearts();
 }
 
-function confettiHearts(){
-  for(let i = 0; i < 200; i++){
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (2 + Math.random() * 5) + "s";
-    heart.style.fontSize = (25 + Math.random() * 60) + "px";
+function confettiHearts() {
+  for (let i = 0; i < 200; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (2 + Math.random() * 5) + 's';
+    heart.style.fontSize = (25 + Math.random() * 60) + 'px';
     heart.style.zIndex = 2;
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
+    setTimeout(() => heart.remove(), 6000);
   }
 }
 
 // Background floating hearts
-const hearts = document.getElementById("hearts");
-for(let i = 0; i < 100; i++){
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (5 + Math.random() * 10) + "s";
-  heart.style.animationDelay = Math.random() * 5 + "s";
-  heart.style.fontSize = (20 + Math.random() * 40) + "px";
+const hearts = document.getElementById('hearts');
+for (let i = 0; i < 100; i++) {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = '❤';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (5 + Math.random() * 10) + 's';
+  heart.style.animationDelay = Math.random() * 5 + 's';
+  heart.style.fontSize = (20 + Math.random() * 40) + 'px';
   heart.style.zIndex = 1;
   hearts.appendChild(heart);
 }
-
 </script>
 
 </body>
